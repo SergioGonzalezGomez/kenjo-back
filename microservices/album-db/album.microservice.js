@@ -50,9 +50,10 @@ class AlbumDbMicroservice {
     try {
       const findQuery = { _id: { $ne: null }};
 
-      const findResult = await AlbumModel.find(findQuery).lean().exec();
+      /* const findResult = await AlbumModel.find(findQuery).lean().exec(); */
+      const findResult = await AlbumModel.find().lean().exec();
 
-      res.status(httpStatusCodes.OK).send(findResult[0]);
+      res.status(httpStatusCodes.OK).send(findResult);
     } catch (error) {
       next(error);
       return;
@@ -67,7 +68,28 @@ class AlbumDbMicroservice {
      * @param {express.Next} next is the middleware to continue with code execution
      * @returns {Object} Empty object if the operation went well
      */
-  updateById = async (req, res, next) => { }
+  updateById = async (req, res, next) => { 
+    let documentId = req.params.id;
+    let updateQuery = { _id: documentId };
+
+    let title= req.body.title;
+    let year= req.body.year;
+    let artist= req.body.artist;
+    let photoUrl= req.body.photoUrl;
+    let score= req.body.score;
+
+    AlbumModel.updateOne(updateQuery, {$set:{title: title, year: year, artist: artist, photoUrl: photoUrl, score: score}}).then(updateResult => {
+      if(check.not.assigned(updateResult)){
+        let error = new Error('Document to update was not found.');
+        next(error);
+        return;
+      }
+
+      res.status(httpStatusCodes.OK).send(title, year, artist, photoUrl, score);
+    }).catch(error => {
+      next(error);
+    });
+  } 
 
     /**
      * @summary Delete a document
