@@ -50,8 +50,8 @@ class AlbumDbMicroservice {
     try {
       const findQuery = { _id: { $ne: null }};
 
-      /* const findResult = await AlbumModel.find(findQuery).lean().exec(); */
-      const findResult = await AlbumModel.find().lean().exec();
+      const findResult = await AlbumModel.find(findQuery).lean().exec();
+      /* const findResult = await AlbumModel.find().lean().exec(); */
 
       res.status(httpStatusCodes.OK).send(findResult);
     } catch (error) {
