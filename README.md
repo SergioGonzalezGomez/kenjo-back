@@ -15,7 +15,6 @@ Functional Errors Resolved:
 
 Error: In album.microservice.js file the function find returns the first record instead of all of them. 
 Solution: I replace the findResult[0] with findResult as the send parameter in order to get all the records.
-y he NO quitado el findquery. 
 
 In album.microservice.js I filled the updateById taking as example the deleteById function and added the title, year, artist, photoUrl and score variables in order to declare them using req.body.   
 In the function AlbumModel.updateOne(updateQuery) I added {$set} in order to take the declared variables parameters and in the res I return the changed variables with .send.
@@ -27,7 +26,8 @@ In the album-list.component.html file I implemented the click event in the openD
 In the album-list.component.ts I imported the MatDialog and added the openDialogUpdateAlbum function and insert the index and album parameters calling the updateAlbumDialogComponent in order to get the data from the album.
 
 In the update-album-dialog.component.html I copied the new-album.dialog.html changing the function of the confirm button to updateAlbum(album)
-Copio el update-album-dialog.scss del new-album-dialog.scss para que tenga los mismo estilos.
+
+I copied the new-album.dialog.scss to the updated-album-dialog.scss to get the same styles
 
 In the update-album-dialog.component.ts I provide the album information to be updated with this.data on each album property. I inyected the mat_dialog_data in order to get the data that I want to update. I copied the updateAlbum function taking the createNewAlbum as example and changed the post to put and added the id to the url with this.data._id
 
