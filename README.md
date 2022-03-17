@@ -1,33 +1,38 @@
 # kenjo-challenge-backend
 
 
-Errores Técnicos:
+ Technical Errors Resolved:
 
-Crear el archivo .env con la conexión a la db de mongoDB.
-He creado una constande urlDB para conectara al link del .env desde index.js
-He eliminado la url del git del package.json
+I created the file .env with conection to the db in MongoDb
 
-En el ngOnInit del album-list.component.ts abrí llaves para meter un console.log(QUITAR)
+I created the urlDb constfor connect the link from .env to the index.js file.  
 
-Errores Funcionales:
+I deleted the url from the git file from the package.json
 
-Error: En el album.microservice.js en la funcion find devuelve el primer registro en vez de todos.
-Solución: Sustituyo el findResult[0] por findResult como parámetro de send para que me devuelva todos.
 
+
+Functional Errors Resolved:
+
+Error: In album.microservice.js file the function find returns the first record instead of all of them. 
+Solution: I replace the findResult[0] with findResult as the send parameter in order to get all the records.
 y he NO quitado el findquery. 
 
-En album.microservice.js he rellenado el updateById cogiendo como ejemplo el deleteById y he hecho las variabless de title, year, artist, photoUrl y score para declararlas usando req.body. En la funcion AlbumModel.updateOne(updateQuery) he añadido el {$set para que coja los parametros de las variables declaradas}. En el res devuelvo con el .send todas las variables cambiadas
+In album.microservice.js I filled the updateById taking as example the deleteById function and added the title, year, artist, photoUrl and score variables in order to declare them using req.body.   
+In the function AlbumModel.updateOne(updateQuery) I added {$set} in order to take the declared variables parameters and in the res I return the changed variables with .send.
 
-He creado el componente update-album-dialog. 
+I created the update-album-dialog component.
 
-En el album-list.component.html he implementado el evento click con la funcion openDialogUpdateAlbum(album, i), para que abra el html del nuevo componente updatealbumdialog.
+In the album-list.component.html file I implemented the click event in the openDialogUpdateAlbum(album, i) function in order to open the html file from the new component updatealbumdialog.
 
-En album-list.component.ts añado la funcion openDialogUpdateAlbum y le paso como parametros el index y el album  llamando al componente UpdateAlbumDialogComponent para que pille la data de ese album e importo el MatDialog
+In the album-list.component.ts I imported the MatDialog and added the openDialogUpdateAlbum function and insert the index and album parameters calling the updateAlbumDialogComponent in order to get the data from the album.
 
-En el update-album-dialog.component.html he copiado el new-album.dialog.html cambiando la funcion del boton evento confirm a updateAlbum(album).
-
+In the update-album-dialog.component.html I copied the new-album.dialog.html changing the function of the confirm button to updateAlbum(album)
 Copio el update-album-dialog.scss del new-album-dialog.scss para que tenga los mismo estilos.
 
-En el update-album-dialog.component.ts paso la infromación del album que se quiere actualizar con this.data en cada propiedad de album. Inyecto el mat_dialog_data para recuperar la data que quiero actualizar. La funcion updateAlbum la copio como createNewAlbum y cambio el post a put y añado el id a la url con this.data._id.
+In the update-album-dialog.component.ts I provide the album information to be updated with this.data on each album property. I inyected the mat_dialog_data in order to get the data that I want to update. I copied the updateAlbum function taking the createNewAlbum as example and changed the post to put and added the id to the url with this.data._id
 
-He creado el componente Services: he importado Injectable, Observable, Subject y tap. He creado la variable privada _refresh$ para que refresce la página cada vez que se hace update y se cree un nuevo album. Creo las funciones createNewAlbum, getAlbum y UpdateAlbum para pasarlas con el servicio a new-album.dialog.ts y a update-album-dialog.components.ts
+I created the Services component: I imported Injectable, Observable, Subject and tap. I created the private variable _refresh$ in order to refresh the page every time there is an update or an album is created. I created the createNewAlbum, getAlbum and UpdateAlbum functions in order to provide them with the service to new-album.dialog.ts and update-album-dialog.ts.
+
+I tried to refresh the album list after using update-album-dialog but I couldn't achieve it. You have to refresh the page manually.
+
+I created the Score component in order to insert the 1-5 score into the album list but couldn't achieve to show it, nor that the openDialogScorealbum remembered the socre you have selected. However it changes the database (altough in the second click instead of the first).
